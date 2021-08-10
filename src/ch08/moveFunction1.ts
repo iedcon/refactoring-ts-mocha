@@ -5,24 +5,19 @@ export type Point = {
 
 export function trackSummary(points: Point[]) {
   const totalTime = calculateTime();
-  const totalDistance = calculateDistance();
-  const pace = totalTime / 60 / totalDistance;
+  const pace = totalTime / 60 / totalDistance(points);
   return {
     time: totalTime,
-    distance: totalDistance,
+    distance: totalDistance(points),
     pace,
   };
-
-  function calculateDistance() {
-    return top_calculateDistance(points);
-  }
 
   function calculateTime() {
     return 10000;
   }
 }
 
-function top_calculateDistance(points: Point[]) {
+function totalDistance(points: Point[]) {
   let result = 0;
   for (let i = 1; i < points.length; i++) {
     result += distance(points[i - 1], points[i]);
